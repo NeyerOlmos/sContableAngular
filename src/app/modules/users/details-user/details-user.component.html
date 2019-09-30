@@ -1,0 +1,14 @@
+<button mat-raised-button color='primary' routerLink='/Users/List' >Go To UserList</button>
+<mat-card>
+        <div *ngIf="( user$ | async ) as user">
+        <div>
+            {{ user.Id }}
+        </div>
+<div>
+    {{user.UserName}}
+</div>
+<div>
+{{user.Email}}
+</div>
+        </div>
+</mat-card>

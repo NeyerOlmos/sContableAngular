@@ -1,0 +1,31 @@
+<div *ngIf="empresa$ | async as empresa" >
+    <mat-toolbar>
+        <span>Empresa:</span>
+    </mat-toolbar>
+<div class="container">
+
+    <mat-card>
+       <mat-form-field>
+           <input matInput placeholder="Nombre de la Empresa" [(ngModel)]="empresa.nombre_RS">
+       </mat-form-field>
+       <mat-form-field>
+           <input matInput placeholder="NIT" [(ngModel)]="empresa.NIT">
+       </mat-form-field>
+       <br>
+    <button mat-button (click)="update(empresa)" >Update</button>
+    <button mat-button (click)="cancel()" >Cancel</button>
+</mat-card>
+
+</div>
+<mat-divider>
+</mat-divider>
+<mat-toolbar>
+    <h4>Departamentos:</h4>
+</mat-toolbar>
+<br>
+<h6>Add Departamento</h6>
+<app-add-departamento [idEmpresa]="empresa.Id" ></app-add-departamento>
+
+<h6>Departamentos List</h6>
+<app-departamento-list [idEmpresa]="empresa.Id" ></app-departamento-list>
+</div>

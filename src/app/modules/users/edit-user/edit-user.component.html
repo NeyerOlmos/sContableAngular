@@ -1,0 +1,16 @@
+<mat-card>
+        <div *ngIf="user$ | async as user">
+            <mat-form-field>
+                    <mat-label>UserName</mat-label>
+                    <input matInput autocomplete="false" [(ngModel)]="user.UserName" matInput placeholder="UserName">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-label>Email</mat-label>
+                      <input autocomplete="false" matInput [(ngModel)]="user.Email" matInput placeholder="Email">
+                    </mat-form-field>
+                    
+                    <br>
+                    <button style="margin-bottom:5px;" mat-raised-button color="primary" (click)="update(user)" >Actualizar</button>
+                    
+        </div>
+</mat-card>

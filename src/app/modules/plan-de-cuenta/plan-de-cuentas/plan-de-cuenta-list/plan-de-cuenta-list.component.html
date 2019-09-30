@@ -1,0 +1,27 @@
+<mat-accordion>
+<div *ngFor='let planDeCuenta of planDeCuentasList$ | async' >
+<mat-expansion-panel >
+    <mat-expansion-panel-header>
+          <mat-panel-title>
+              {{planDeCuenta.nombre}}
+            </mat-panel-title>
+            <mat-panel-description>
+                <span>
+                    idEmpresa: {{planDeCuenta.id_empresa}}
+                </span>    
+
+
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-toolbar>
+            <span>Plan de Cuentas</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button class="actionButtons" (click)="goToEditPlanDeCuenta(planDeCuenta)" ><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button class="actionButtons" (click)="deletePlanDeCuenta(planDeCuenta)" ><mat-icon>delete</mat-icon></button>
+    </mat-toolbar>
+    <app-tree-view [planDeCuenta]="planDeCuenta" ></app-tree-view>
+        
+                  
+ </mat-expansion-panel>
+</div>
+</mat-accordion>

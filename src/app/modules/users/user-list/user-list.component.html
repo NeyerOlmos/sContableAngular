@@ -1,0 +1,36 @@
+<!--
+        <button mat-raised-button color="accent" (click)='goToAddUser()' >AddUser</button>
+
+    <div *ngIf='let userList of userList$ | async ' >
+        -->
+
+    <div *ngFor='let User of userList$ | async' > 
+        <mat-card>
+            <div class="container" >
+                    <div class="row">
+                        <div class="col-3">
+                                <div>
+                                        {{User.UserName}}
+                                </div>
+                        </div>
+                        <div class="col-3">
+                                <div>
+                                        {{User.Email}}
+                                </div>
+                        </div>
+                        <div class="col align-self-end">
+                                <div>
+                                        <button mat-raised-button color="primary" (click)='goToDetails(User.Id)' >Detalles</button>
+                                        <button mat-raised-button color="accent" (click)='goToEditUser(User.Id)' >Editar</button>
+                                        <button mat-raised-button color="warn" (click)='deleteUser(User.Id)' >Eliminar</button>     
+                                </div>
+                        </div>
+                    </div>
+                </div>
+    </mat-card>
+    
+    <!--
+</div>
+
+-->
+</div>

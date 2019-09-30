@@ -1,0 +1,14 @@
+<ng-container>
+
+    <mat-list>
+        <div *ngFor="let cuenta of cuentasList$ | async" >
+            <mat-list-item> <mat-checkbox checked="true" ></mat-checkbox> {{cuenta.Cod}} {{cuenta.nombre}}  </mat-list-item>
+          <!-- 
+
+              <button mat-button (click)="showChildrends(cuenta.id)" >showChildrens</button>
+            --> 
+            
+        </div>
+    </mat-list>
+
+</ng-container>

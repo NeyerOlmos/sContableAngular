@@ -1,0 +1,26 @@
+<mat-card>
+        <div *ngIf="user">
+            <mat-form-field>
+                    <mat-label>UserName</mat-label>
+                    <input matInput autocomplete="false" [(ngModel)]="user.UserName" matInput placeholder="UserName">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-label>Email</mat-label>
+                      <input autocomplete="false" matInput [(ngModel)]="user.Email" matInput placeholder="Email">
+                    </mat-form-field>
+                    
+                    <br>
+                    <mat-form-field>
+                        <mat-label>Rol</mat-label>
+                        <mat-select matNativeControl required >
+                                <mat-option value='Admin'>Admin</mat-option>
+                                <mat-option value='Contador'>Contador</mat-option>
+                                <mat-option value='Gerente'>Gerente</mat-option>
+                        </mat-select>
+                </mat-form-field>
+                    <br>
+                    <button style="margin-bottom:5px;" mat-raised-button color="primary" (click)="addUser()" >Add</button>
+                    <button style="margin-bottom:5px;" mat-raised-button color="primary" routerLink='/Users/List' >Cancel</button>
+        
+        </div>
+</mat-card>

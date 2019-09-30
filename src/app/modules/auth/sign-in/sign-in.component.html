@@ -1,0 +1,23 @@
+
+<div class="container">
+    <mat-card>
+        <mat-form-field>
+            <mat-label>UserName</mat-label>
+            <input matInput [(ngModel)]="username" placeholder="UserName" #UserName="ngModel"  name="UserName" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="password"  placeholder="Password" #UserName="ngModel"  name="Password" required>
+        </mat-form-field>
+
+        <br>
+                <button style="margin-bottom:5px;" mat-raised-button color="primary" (click)="logIn()" >Iniciar Session</button>
+                <button style="margin-bottom:5px;" mat-raised-button color="primary" (click)="cancel()" >Cancelar</button>
+
+        
+        
+    </mat-card>
+</div>
+<div>is logged: {{isLoggedInUser$ | async }}</div>
+    <app-loading [isVisible]="viewBlocked" ></app-loading>

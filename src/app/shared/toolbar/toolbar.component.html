@@ -1,0 +1,102 @@
+<mat-toolbar color="primary" >
+    <mat-toolbar-row>
+            <button mat-button [matMenuTriggerFor]="usuariosMenu">Usuarios</button>
+
+            <mat-menu #usuariosMenu="matMenu">
+                    <button mat-menu-item routerLink="/Users/Add" >
+                      <mat-icon>person_add</mat-icon>
+                      <span>Add usuario</span>
+                    </button>
+                    <button mat-menu-item routerLink="/Users/List">
+                      <mat-icon>list</mat-icon>
+                      <span>User list</span>
+                    </button>
+            </mat-menu>
+            <button mat-button [matMenuTriggerFor]="empresaMenu" >Empresa</button>
+            <mat-menu #empresaMenu="matMenu" >
+                <button mat-menu-item routerLink="/Empresas/Add" >
+                    <mat-icon>add</mat-icon>
+                    <span>Add Empresa</span>
+                </button>
+                <button mat-menu-item routerLink="/Empresas/List" >
+                    <mat-icon>list</mat-icon>
+                    <span>Empresa list</span>
+                </button>
+            </mat-menu>
+
+            <button mat-button [matMenuTriggerFor]="planDeCuentasMenu" >Plan de Cuentas</button>
+            <mat-menu #planDeCuentasMenu="matMenu" >
+                
+                    <button mat-menu-item routerLink="/PlanDeCuentas/Add" >
+                        <mat-icon>add</mat-icon>
+                        <span>Add Plan de cuenta</span>
+                      </button>
+                <button mat-menu-item routerLink="/PlanDeCuentas/List" >
+                    <mat-icon>list</mat-icon>
+                    <span>Todos los Plan de cuentas</span>
+                </button>
+                <button mat-menu-item routerLink="/PlanDeCuentas/AddCuentaContable" >
+                    <mat-icon>add</mat-icon>
+                    <span>Add cuenta contable</span>
+                </button>
+                <button mat-menu-item routerLink="/PlanDeCuentas/Cuentas" >
+                    <mat-icon>list</mat-icon>
+                    <span>cuenta contable list</span>
+                </button>
+            </mat-menu>
+
+            <button mat-button [matMenuTriggerFor]="comprobantesMenu" >Comprobantes</button>
+            <mat-menu #comprobantesMenu="matMenu" >
+                <button  mat-menu-item routerLink="/Comprobante/Add" >
+                <mat-icon>add</mat-icon>
+                <span>Add comprobante</span>
+                </button>
+
+
+            </mat-menu>
+
+
+            <button mat-button [matMenuTriggerFor]="libroDiarioMenu" >Libro Diario</button>
+            <mat-menu #libroDiarioMenu="matMenu" >
+                <button  mat-menu-item routerLink="/LibroDiario" >
+                <mat-icon>assignment</mat-icon>
+                <span>Libro Diario</span>
+                </button>
+
+            </mat-menu>
+                <button mat-button [matMenuTriggerFor]="libroMayorMenu" >Libro Mayor</button>
+                <mat-menu #libroMayorMenu="matMenu" >
+                    <button  mat-menu-item routerLink="/LibroMayor" >
+                    <mat-icon>assignment</mat-icon>
+                    <span>Libro Mayor</span>
+                    </button>
+            </mat-menu>
+                <button mat-button [matMenuTriggerFor]="reportesMenu" >Reportes</button>
+                <mat-menu #reportesMenu="matMenu" >
+                    <button  mat-menu-item routerLink="/Reportes" >
+                    <mat-icon>bar_chart</mat-icon>
+                    <span>Reportes</span>
+                    </button>
+            </mat-menu>
+            <mat-menu #appMenu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>settings_applications</mat-icon>
+                <span>Settings</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>info</mat-icon>
+                    <span>Info</span>
+                </button>
+                <button mat-menu-item (click)='logOut()' >
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>LogOut</span>
+                </button>
+            </mat-menu>
+
+            <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>more_vert</mat-icon>
+            </button>
+
+                  
+    </mat-toolbar-row>
+</mat-toolbar>

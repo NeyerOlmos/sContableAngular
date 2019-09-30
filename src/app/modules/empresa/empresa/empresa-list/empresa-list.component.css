@@ -1,0 +1,10 @@
+mat-card {
+    margin: 5px;
+    
+width: 300px;
+}
+.container {
+display:flex;
+flex-flow:wrap;
+justify-content: center;
+}

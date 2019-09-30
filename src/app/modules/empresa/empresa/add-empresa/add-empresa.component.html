@@ -1,0 +1,18 @@
+<div class="container">
+<mat-card>
+        <mat-form-field>
+            <input matInput [(ngModel)]="empresa.nombre_RS" placeholder="Nombre de Empresa" >
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput [(ngModel)]="empresa.NIT" placeholder="NIT" >
+        </mat-form-field>
+        <br>
+    
+        <button mat-button (click)="addEmpresa(empresa)" >
+            <span>Add</span>
+        </button>
+        <button mat-button >cancel</button>
+</mat-card>
+
+</div>

@@ -1,0 +1,9 @@
+<div class="container">
+<mat-card>
+    <mat-form-field>
+        <input matInput placeholder="Nombre de departamento" [(ngModel)]="departamento.nombre" >
+    </mat-form-field>
+    <br>
+    <button mat-button (click)="addDepartamento(departamento)" >Add</button>
+</mat-card>
+</div>
