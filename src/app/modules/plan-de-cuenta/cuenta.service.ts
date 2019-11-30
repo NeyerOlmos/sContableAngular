@@ -6,6 +6,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map, filter, mapTo } from 'rxjs/operators';
 import { PlanDeCuentas } from 'src/app/models/plan-de-cuentas';
+import { AsientoContable } from 'src/app/models/asiento-contable';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class CuentaService {
   //      'Authorization': 'my-auth-token'
       })
     };
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { this.loadAll() }
 
   get cuentasList() {
     return this._cuentas.asObservable();
@@ -32,7 +33,6 @@ export class CuentaService {
     return cods.length - 1 ;
   }
   getCuentasByPlanDeCuentas(planDeCuentas: PlanDeCuentas){
-      this.loadAll()
       return this._cuentas.asObservable().pipe(map(cuentas=> {
         return cuentas.filter(cuenta=>cuenta.id_PlanDeCuentas=planDeCuentas.Cod );
       }))
@@ -56,6 +56,9 @@ export class CuentaService {
       );
     return maxLevel;
   }
+  addAsientoContable(asiento: AsientoContable){
+    return this.http.post(this.apiUrl+"/api/asiento_contable",asiento);
+  }
   getDirectChildrenByCod(cuentas: CuentaContable[], cod: string) {
 
      const _cuentas = of(cuentas);
@@ -67,10 +70,12 @@ export class CuentaService {
        //return cuentaLevel
     }
 
-    getChildren(cuentas: Observable<CuentaContable[]>, nombre: string) {
+      getChildren(cuentas: Observable<CuentaContable[]>, nombre: string) {
       //const cuentas = this._cuentas.asObservable();
+
       const children = cuentas.pipe(
         map(cuentas => {
+          
          return cuentas.find(cuenta => cuenta.nombre === nombre);
         }),
         map(cuenta => cuenta.id),
@@ -82,23 +87,76 @@ export class CuentaService {
     getChildrenById(cuentas: Observable<CuentaContable[]>, id: number) {
      // const cuentas = this._cuentas.asObservable();
      var cuentasContables: CuentaContable[]= [];
-      const children = cuentas.pipe(map(cuentas => {
+     const children = cuentas.pipe(map(cuentas => {
         return cuentas.filter(cuenta => cuenta.cta_padre === id);
       }));
 
-      children.subscribe(cuentasChildren=> {
+     children.subscribe(cuentasChildren=> {
         cuentasContables = cuentasChildren;
       })
 
-      return cuentasContables;
+     return cuentasContables;
     }
   getCuentasToArrayString(cuentas: CuentaContable[]){
+    const _cuentas: string[]=[];
+    cuentas.forEach(cuenta=>{
+        _cuentas.push(cuenta.Cod + " " + cuenta.nombre);
+    })
+    return _cuentas;
+  }
+  getCuentasToArrayStringWithOutCodes(cuentas: CuentaContable[]){
     const _cuentas: string[]=[];
     cuentas.forEach(cuenta=>{
         _cuentas.push(cuenta.nombre);
     })
     return _cuentas;
   }
+  getCuentaByName(name: string){
+   var cuenta: CuentaContable;
+   this.cuentasList.subscribe(c=>{
+    cuenta =  c.find(_c=>_c.nombre==name)
+    })
+   return cuenta;
+  }
+  getCod(cuentaPadre: CuentaContable ){
+    if(cuentaPadre){
+      var cuentas = this.getChildrenById(this.cuentasList,cuentaPadre.id)
+      if(cuentas.length > 0){
+     var lastCuentaChild = cuentas[cuentas.length - 1];
+     var codLastCuenta = lastCuentaChild.Cod;
+     var numbers=codLastCuenta.split(".");
+     var num = +numbers[numbers.length - 2 ];
+     numbers[numbers.length - 2] = (num + 1).toString();
+    return numbers.join(".");
+    }else{
+     return cuentaPadre.Cod + "1.";
+    }
+  }else{
+    var result :string;
+    this.cuentasList.subscribe(c=>{
+      var cuentasLevel1 = this.getCuentasByLevel(c,1); 
+      if(cuentasLevel1.length>0){
+
+        var LastCuentaLevel1 =  cuentasLevel1[cuentasLevel1.length - 1];
+        var codLastCuentaLevel1 =LastCuentaLevel1.Cod;
+        var numbersLevel1= codLastCuentaLevel1.split(".");
+        var numLevel1= +numbersLevel1[numbersLevel1.length - 2];
+        numbersLevel1[numbersLevel1.length - 2] = (numLevel1 + 1).toString();
+      result = numbersLevel1.join(".");
+    }else{
+      result = "1.";
+    }
+    })
+    return result;
+  }
+  }
+  getCuentasActivo(){
+
+  }
+  getCuentasPasivo(){
+    
+  }
+  
   load(id: number | string) {
     this.http.get<CuentaContable>(`${this.apiUrl}/api/cuentas/${id}`).subscribe(cuenta => {
       let notFound = true;
@@ -124,16 +182,16 @@ export class CuentaService {
     }, error => console.log('Could not load users.'));
   }
   create(cuenta: CuentaContable) {
-    this.http.post<CuentaContable>(`${this.apiUrl}/api/plan_cuenta`, cuenta).subscribe( cuenta => {
+    this.http.post<CuentaContable>(`${this.apiUrl}/api/cuentas`, cuenta).subscribe( cuenta => {
         this.dataStore.cuentas.push(cuenta);
         this._cuentas.next(Object.assign({}, this.dataStore).cuentas);
-        this.router.navigate(['/Cuentas/Details/' + cuenta.id]);
+       // this.router.navigate(['/Cuentas/Details/' + cuenta.id]);
 
       }, error => console.log('Could not create todo.'));
   }
 
   update(cuenta: CuentaContable) {
-    this.http.put<CuentaContable>(`${this.apiUrl}/api/plan_cuenta/${cuenta.id}`, cuenta)
+    this.http.put<CuentaContable>(`${this.apiUrl}/api/cuentas/${cuenta.id}`, cuenta)
       .subscribe(cuenta => {
         this.dataStore.cuentas.forEach((t, i) => {
           if (t.id === cuenta.id) { this.dataStore.cuentas[i] = cuenta; }

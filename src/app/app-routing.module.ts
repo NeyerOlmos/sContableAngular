@@ -7,6 +7,8 @@ const routes: Routes = [
   {path: 'Auth', loadChildren: './modules/auth/auth.module#AuthModule'},
   {path: 'Users', loadChildren: './modules/users/users.module#UsersModule'},
   {path: 'PlanDeCuentas', loadChildren: './modules/plan-de-cuenta/plan-de-cuentas.module#PlanDeCuentasModule'},
+  {path: 'Balances', loadChildren: './modules/balances/balances.module#BalancesModule'},
+  {path: 'AsientosContables', loadChildren: './modules/asientos-contables/asientos-contables.module#AsientosContablesModule'},
   {path: 'Empresas', loadChildren: './modules/empresa/empresa.module#EmpresaModule'}
 ];
 

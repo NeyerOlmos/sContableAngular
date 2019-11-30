@@ -44,15 +44,28 @@
                     <span>cuenta contable list</span>
                 </button>
             </mat-menu>
-
+            <button mat-button [matMenuTriggerFor]="balancesMenu" >Balances</button>
+            <mat-menu #balancesMenu="matMenu" >
+                <button mat-menu-item routerLink="/Balances/Add" >
+                    <mat-icon>add</mat-icon>
+                <span>Add Balance de Apertura</span>
+                </button>
+                
+            </mat-menu>
+            <button mat-button [matMenuTriggerFor]="asientosContablesMenu" >Asientos Contables</button>
+            <mat-menu #asientosContablesMenu="matMenu" >
+                <button mat-menu-item routerLink="/AsientosContables/Add" >
+                    <mat-icon>add</mat-icon>
+                <span>Add Asiento Contable</span>
+                </button>
+                
+            </mat-menu>
             <button mat-button [matMenuTriggerFor]="comprobantesMenu" >Comprobantes</button>
             <mat-menu #comprobantesMenu="matMenu" >
                 <button  mat-menu-item routerLink="/Comprobante/Add" >
                 <mat-icon>add</mat-icon>
                 <span>Add comprobante</span>
                 </button>
-
-
             </mat-menu>
 
 
@@ -71,6 +84,7 @@
                     <span>Libro Mayor</span>
                     </button>
             </mat-menu>
+
                 <button mat-button [matMenuTriggerFor]="reportesMenu" >Reportes</button>
                 <mat-menu #reportesMenu="matMenu" >
                     <button  mat-menu-item routerLink="/Reportes" >

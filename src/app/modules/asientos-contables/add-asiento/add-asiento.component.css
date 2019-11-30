@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100%;
+    width: 100%;
+}
+mat-card{
+    display: flex;
+    flex-direction: column;
+    
+    min-width: 450px;
+    /*
+    min-height: 600px;
+    flex-wrap: wrap;
+    
+    */
+}

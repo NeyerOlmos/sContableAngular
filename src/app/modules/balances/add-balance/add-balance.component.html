@@ -1,0 +1,101 @@
+
+<h1>Empresa Saparicio</h1>
+<h2>Balance de apertura</h2>
+<h3>octubre 08, 2019</h3>
+    
+<!--
+
+
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+      </button>
+      <mat-vertical-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Registra los activos circulantes</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+            <button mat-raised-button color="primary" (click)="openDialog()">Add Asiento</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Identifica los activos fijos</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="Address" formControlName="secondCtrl" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Contabiliza los pasivos circulantes</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Registra los pasivos fijos</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+-->
+<mat-list>
+  <h3 mat-subheader>Activos</h3>
+  <mat-list-item *ngFor="let folder of folders">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <h4 mat-line>{{folder.name}}</h4>
+    <p mat-line> {{folder.updated | date}} </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mat-subheader>Pasivos mas Capital</h3>
+  <mat-list-item *ngFor="let note of notes">
+    <mat-icon mat-list-icon>note</mat-icon>
+    <h4 mat-line>{{note.name}}</h4>
+    <p mat-line> {{note.updated | date}} </p>
+  </mat-list-item>
+</mat-list>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <!--
+    -->
+    <mat-grid-tile-header>
+   <h4>
+     Activos
+     
+   </h4> 
+  </mat-grid-tile-header>
+  <mat-list>
+    <mat-list-item>
+      <h4 mat-line > Cuentas y banco </h4>
+    </mat-list-item>
+    <mat-list-item>
+      <h4 mat-line > Banco </h4>
+    </mat-list-item>
+
+  </mat-list>
+  <mat-grid-tile-footer>
+    Total Activos: 
+  </mat-grid-tile-footer>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item>
+        <h4 mat-line > Pasivos </h4>
+      </mat-list-item>
+    </mat-list>
+    
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,15 +1,33 @@
-<mat-card>
-    <mat-form-field>
-        <input matInput placeholder="Codigo de cuenta padre" >
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-        <input matInput placeholder="Nombre de Cuenta" >
-    </mat-form-field>
-    <br>
+<div class="container">
+    <div class="col-6">
 
-    <button mat-button>
+        <mat-card>
+            <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Cuenta Padre" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder="Nombre de Cuenta" [(ngModel)]="cuenta.nombre" >
+    </mat-form-field>
+    <br>
+    
+    <button mat-button (click)="addCuentaContable(cuenta)" >
         <span>Add</span>
     </button>
     <button mat-button routerLink="/PlanDeCuentas/List" >cancel</button>
 </mat-card>
+</div>
+<div class="col-6">
+
+    <div *ngIf="planDeCuenta" >
+        <app-tree-view  [rootLevelNodes$]="rootLevelNodes$" [dataMap$]="dataMap$" ></app-tree-view>
+    </div>
+    
+</div>
+</div>
+

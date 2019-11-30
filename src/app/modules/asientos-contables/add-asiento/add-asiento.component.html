@@ -1,0 +1,68 @@
+
+          <mat-toolbar>
+              <h3>Add Asiento</h3>        
+            </mat-toolbar>
+            <div class="container">
+
+                <mat-card >
+                    <mat-form-field>
+                        <input matInput type="date" placeholder="Fecha" >
+                    </mat-form-field>
+                    <mat-form-field>
+
+                        <mat-select placeholder="Type" [(ngModel)]="selectedTypeAsientoValue" name="item">
+                            <mat-option *ngFor="let item of typeAsientos" [value]="item.value">
+                                {{item.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+
+                        <mat-select placeholder="Type" [(ngModel)]="selectedCuentaIngresoValue" name="item">
+                            <mat-option *ngFor="let cuenta of cuentas$ | async" [value]="cuenta.id">
+                                {{cuenta.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Detalle" [(ngModel)]="asiento.fecha">
+                    </mat-form-field>
+                
+                    <mat-form-field>
+                        <input matInput placeholder="Nro de Folio" [(ngModel)]="asiento.Nro_folio">
+                    </mat-form-field>
+<ng-container *ngIf="selectedTypeAsientoValue == 1; else elseTemplate">
+    <mat-form-field>
+        <input matInput placeholder="Debitos" [(ngModel)]="asiento.debitos">
+    </mat-form-field>
+    
+</ng-container>
+<ng-template #elseTemplate>
+
+    <ng-container *ngIf="selectedTypeAsientoValue==2; else elseTemplate">
+        <mat-form-field>
+            <input matInput placeholder="Creditos" [(ngModel)]="asiento.creditos">
+        </mat-form-field>
+        
+    </ng-container>
+    <ng-template #elseTemplate>
+        <ng-container *ngIf="selectedTypeAsientoValue==3;">
+                <mat-form-field>
+                        <input matInput placeholder="Monto" [(ngModel)]="asiento.creditos">
+                </mat-form-field>
+        </ng-container>
+        
+    </ng-template>
+    
+
+</ng-template>
+
+
+
+                    
+                    <button mat-button (click)="save(selectedTypeAsientoValue)" >Save</button>
+                       
+                </mat-card>
+            </div>

@@ -9,12 +9,11 @@ import { MatAutocompleteModule, MatBadgeModule, MatButtonModule, MatButtonToggle
   MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule,
    MatTooltipModule, 
    MatTreeModule} from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
-
 
 @NgModule({
   declarations: [BaseFormComponent, LoadingComponent, ToolbarComponent, TreeViewComponent],
@@ -56,7 +55,8 @@ import { TreeViewComponent } from './tree-view/tree-view.component';
     MatToolbarModule,
     MatTooltipModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -99,7 +99,8 @@ import { TreeViewComponent } from './tree-view/tree-view.component';
     FormsModule,
     HttpClientModule,
     ToolbarComponent,
-    TreeViewComponent
+    TreeViewComponent,
+    ReactiveFormsModule
 
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA,

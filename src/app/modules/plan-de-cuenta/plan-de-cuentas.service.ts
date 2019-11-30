@@ -5,7 +5,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { CuentaService } from './cuenta.service';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class PlanDeCuentasService {
   //      'Authorization': 'my-auth-token'
       })
     };
+
+
+    dataMap = new Map<string, string[]>();
+    rootLevelNodes: string[] = [];
   constructor(private http: HttpClient, private router: Router, private cuentasService: CuentaService) { }
 
   get planDeCuentasList(){
@@ -80,25 +84,26 @@ export class PlanDeCuentasService {
       this._planDeCuentas.next(Object.assign({}, this.dataStore).planDeCuentas);
     }, error => console.log('Could not delete user.'));
   }
+getPlanDeCuentaByIdEmpresa(idEmpresa: number){
+ return this.planDeCuentasList.pipe(map(c=>c.find(_c=>_c.id_empresa==idEmpresa)))
+}
 
-
-   dataMapPlanDeCuentas = new Map<string, string[]>();
-   rootLevelNodes: string[] = [];
+   
   getPlanDeCuentas(planDeCuenta: PlanDeCuentas) {
-    console.log("se ejecuta :V")
+    
+  //  console.log("se ejecuta :V")
     const cuentas = this.cuentasService.getCuentasByPlanDeCuentas(planDeCuenta);
+    //console.log(cuentas)
     //cuentas.subscribe(c=>console.log(c))
     var dataMapPlanDeCuentas =  cuentas.pipe(
       map(cuentas=>{
-       // console.log("cuentas")
-       // console.log(cuentas)
         var dataMapPlanDeCuentas2 = new Map<string, string[]>();
         cuentas.forEach(cuenta=>
         { var cuentasChildrensInArrayString : string[]=[];
-          this.cuentasService.getChildren(of(cuentas),cuenta.nombre).subscribe(cuentas=>{
+          this.cuentasService.getChildren(of(cuentas),cuenta.nombre).toPromise().then(cuentas=>{
           cuentasChildrensInArrayString = this.cuentasService.getCuentasToArrayString(cuentas);
+          dataMapPlanDeCuentas2.set(cuenta.Cod + " " + cuenta.nombre,cuentasChildrensInArrayString)
         })
-          dataMapPlanDeCuentas2.set(cuenta.nombre,cuentasChildrensInArrayString)
       }
       )
         return dataMapPlanDeCuentas2;
@@ -109,15 +114,20 @@ export class PlanDeCuentasService {
     return dataMapPlanDeCuentas;
   }
   getPlanDeCuentasFinal(planDeCuenta: PlanDeCuentas){
-      this.getPlanDeCuentas(planDeCuenta).subscribe(c=>{
-        this.dataMapPlanDeCuentas=c;
-      })
-      return this.dataMapPlanDeCuentas;
+    var res:Map<string,string[]>;
+    this.getPlanDeCuentas(planDeCuenta).subscribe(val=>{
+     
+      this.dataMap = val;
+    });
+    return this.dataMap;
   }
   getRootNodesByPlanDeCuentasFinal(planDeCuenta: PlanDeCuentas){
-    this.getRootNodesByPlanDeCuentas(planDeCuenta).subscribe(c=>{
-      this.rootLevelNodes= c
-    })
+    let res:string[];
+    this.getRootNodesByPlanDeCuentas(planDeCuenta).toPromise().then(val=>{
+      
+      this.rootLevelNodes=val;
+    });
+    
     return this.rootLevelNodes;
   }
   getRootNodesByPlanDeCuentas(planDeCuenta: PlanDeCuentas) {
@@ -129,9 +139,10 @@ export class PlanDeCuentasService {
        }),
       map(c => {
         const rootLevelNodes: string[] = [];
-        c.forEach( c => rootLevelNodes.push(c.nombre))
+        c.forEach( c => rootLevelNodes.push(c.Cod + " " + c.nombre))
         return rootLevelNodes;
-      }));
+      })
+      )
 
     return rootCuentas;
   }

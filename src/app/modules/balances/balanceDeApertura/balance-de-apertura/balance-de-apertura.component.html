@@ -1,0 +1,28 @@
+<mat-nav-list>
+    <H1>ACTIVOS</H1>
+    <div *ngFor="let cuentaActivo of _cuentasActivo" >
+    <mat-list-item >
+    <div>
+        {{cuentaActivo.nombre}}
+    </div>
+
+</mat-list-item>
+
+  </div>
+    
+    <mat-divider>
+    </mat-divider>
+
+    <H1>PASIVOS</H1>
+    <div *ngFor="let cuentaPasivo of _cuentasPasivo">
+
+        <mat-list-item  >
+            <div>
+                
+                {{cuentaPasivo.nombre}}
+            </div>
+            
+    </mat-list-item>
+        </div>
+    
+</mat-nav-list>

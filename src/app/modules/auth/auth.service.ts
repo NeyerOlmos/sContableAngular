@@ -23,6 +23,7 @@ export class AuthService {
    SignIn(username: string, password: string) {
     const data = 'username=' + username + '&password=' + password + '&grant_type=password';
     const reqHeader = new HttpHeaders({'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True'});
+    console.log(this.apiUrl)
     return this.http.post(this.apiUrl + '/Token' , data , {headers: reqHeader} ).toPromise();
   }
   isLoggedIn(){

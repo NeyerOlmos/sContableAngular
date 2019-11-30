@@ -32,6 +32,7 @@ implements OnInit {
   rootLevelNodesTest2: string[] = [];
   dataMapTest2 = new Map<string, string[]>([]);
   sw: boolean = false;
+  
   constructor(private planDeCuentaService: PlanDeCuentasService, private router: Router) {
     super();
   }
@@ -44,6 +45,7 @@ implements OnInit {
 
     this.planDeCuentasList$ = this.planDeCuentaService.planDeCuentasList;
     this.planDeCuentaService.loadAll();
+    
    // this.dataSource.data = TREE_DATA;
 
   }
@@ -54,6 +56,21 @@ implements OnInit {
   deletePlanDeCuenta(planDeCuenta: PlanDeCuentas){
     this.planDeCuentaService.remove(planDeCuenta.Cod);
   }
-
-  
+  //this.planDeCuentasService.loadAll();
+    //this.planDeCuentasService.getPlanDeCuentas(this.planDeCuenta).subscribe(values=>{
+     // this.dataMap = values;
+    //})
+    //this.planDeCuentasService.getRootNodesByPlanDeCuentas(this.planDeCuenta).subscribe(values=>{
+     // this.rootLevelNodes = values;
+    //})
+  getPlanDeCuentas(planDeCuenta: PlanDeCuentas){
+    
+    return this.planDeCuentaService.getPlanDeCuentas(planDeCuenta)
+    return this.dataMapTest2;
+  }
+  getRootNodesByPlanDeCuentas(planDeCuenta: PlanDeCuentas){
+   return this.planDeCuentaService.getRootNodesByPlanDeCuentas(planDeCuenta)
+    
+   return this.rootLevelNodesTest2;
+  }
 }

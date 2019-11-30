@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Añadir Asiento</h1>
+<div mat-dialog-content>
+  <p>Que tipo de asiento es?</p>
+  <mat-form-field>
+        <mat-label>Tipo:</mat-label>
+        <mat-select matNativeControl required >
+                <mat-option value='Ingreso'>Activo</mat-option>
+                <mat-option value='Egreso'>Pasivo</mat-option>
+                <mat-option value='Traspaso'>Traspaso</mat-option>
+        </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+        <mat-label>Plan de Cuenta:</mat-label>
+        <mat-select matNativeControl required >
+                <mat-option value='EmpresaComercial'>Empresa Comercial</mat-option>
+        </mat-select>
+</mat-form-field>
+<mat-form-field>
+        <mat-label>Cuenta Contable:</mat-label>
+        <mat-select matNativeControl required >
+                <mat-option value='EmpresaComercial'>Empresa Comercial</mat-option>
+        </mat-select>
+</mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div>
