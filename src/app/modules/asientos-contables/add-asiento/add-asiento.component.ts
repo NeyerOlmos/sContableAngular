@@ -14,8 +14,8 @@ asiento = new AsientoContable();
   constructor(private cuentasService: CuentaService) { }
   typeAsientos = [{value: 1, viewValue: 'Ingreso'},{value:2, viewValue:'Egreso'}, {value: 3, viewValue:'Traspaso'}];
   cuentas$ : Observable<CuentaContable[]>;
-  private selectedTypeAsientoValue : number ;
-  private selectedCuentaIngresoValue : number ;
+   selectedTypeAsientoValue : number ;
+   selectedCuentaIngresoValue : number ;
   ngOnInit() {
     this.cuentas$ = this.cuentasService.cuentasList;
     this.cuentasService.loadAll();
