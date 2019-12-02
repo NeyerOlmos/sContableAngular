@@ -22,5 +22,7 @@ export class DetailsEmpresaComponent implements OnInit {
     );
     this.empresaService.load(+id);
   }
-
+cancel(){
+  console.log("cancel")
+}
 }
