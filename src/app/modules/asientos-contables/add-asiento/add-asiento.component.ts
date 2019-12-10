@@ -3,6 +3,7 @@ import { AsientoContable } from 'src/app/models/asiento-contable';
 import { CuentaService } from '../../plan-de-cuenta/cuenta.service';
 import { CuentaContable } from 'src/app/models/cuenta-contable';
 import { Observable } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-add-asiento',
@@ -11,18 +12,59 @@ import { Observable } from 'rxjs';
 })
 export class AddAsientoComponent implements OnInit {
 asiento = new AsientoContable();
-  constructor(private cuentasService: CuentaService) { }
-  typeAsientos = [{value: 1, viewValue: 'Ingreso'},{value:2, viewValue:'Egreso'}, {value: 3, viewValue:'Traspaso'}];
-  cuentas$ : Observable<CuentaContable[]>;
-   selectedTypeAsientoValue : number ;
-   selectedCuentaIngresoValue : number ;
-  ngOnInit() {
-    this.cuentas$ = this.cuentasService.cuentasList;
-    this.cuentasService.loadAll();
 
-  }
+constructor(private cuentasService: CuentaService, private fb: FormBuilder) {
+  
+ }
+typeAsientos = [{value: 1, viewValue: 'Simple'},{value:2, viewValue:'Compuesto'}];
+cuentas$ : Observable<CuentaContable[]>;
+cuentas:CuentaContable[];
+selectedTypeAsientoValue : number ;
+selectedCuentaIngresoValue : number ;
+asientoForm: FormGroup;
+movimientos: FormArray;
+/**
+ * 
+ asientoForm = this.fb.group({
+  nroFolio:[''],
+  descripcion:[''],
+  movimientos: this.fb.array([this.fb.control('')])
+})
+ */
+tipoMovimientos: string[] = ['Debe', 'Haber'];
 
-  save(selectedValue: number){
+ngOnInit() {
+  this.cuentas$ = this.cuentasService.cuentasList;
+  this.cuentasService.loadAll();
+  this.cuentas$.subscribe(c=>this.cuentas=c);
+  this.asientoForm = this.fb.group({
+    nroFolio: '',
+    fecha: '',
+    descripcion: '',
+    movimientos: this.fb.array([ this.createItem() ])
+  });
+}
+createItem(): FormGroup {
+  return this.fb.group({
+    cuentaId: '',
+    description: '',
+    monto: '',
+    tipoMovimiento:''
+  });
+}
+addItem(): void {
+  this.movimientos = this.asientoForm.get('movimientos') as FormArray;
+  this.movimientos.push(this.createItem());
+}
+
+onSubmit() {
+  // TODO: Use EventEmitter with form value
+  console.warn(this.asientoForm.value);
+}
+
+
+
+save(selectedValue: number){
     this.asiento.id_Comprobante = selectedValue;
     
     

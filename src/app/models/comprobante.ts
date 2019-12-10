@@ -5,7 +5,7 @@ export class Comprobante {
         estado: string;
         descripcion: string;
         debitos?: any;
-        creditos: number;
+        creditos?: number;
         id_tipodecomprobante: number;
         id_cuenta: number;
         id_Moneda: number;

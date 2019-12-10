@@ -9,7 +9,8 @@ const routes: Routes = [
   {path: 'PlanDeCuentas', loadChildren: './modules/plan-de-cuenta/plan-de-cuentas.module#PlanDeCuentasModule'},
   {path: 'Balances', loadChildren: './modules/balances/balances.module#BalancesModule'},
   {path: 'AsientosContables', loadChildren: './modules/asientos-contables/asientos-contables.module#AsientosContablesModule'},
-  {path: 'Empresas', loadChildren: './modules/empresa/empresa.module#EmpresaModule'}
+  {path: 'Empresas', loadChildren: './modules/empresa/empresa.module#EmpresaModule'},
+  {path: 'Libros', loadChildren: './modules/libros/libros.module#LibrosModule'},
 ];
 
 @NgModule({

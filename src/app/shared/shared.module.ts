@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TreeViewComponent } from './tree-view/tree-view.component';
-
 @NgModule({
   declarations: [BaseFormComponent, LoadingComponent, ToolbarComponent, TreeViewComponent],
   imports: [

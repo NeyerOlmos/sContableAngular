@@ -2,6 +2,8 @@
           <mat-toolbar>
               <h3>Add Asiento</h3>        
             </mat-toolbar>
+<!--
+      
             <div class="container">
 
                 <mat-card >
@@ -9,53 +11,48 @@
                         <input matInput type="date" placeholder="Fecha" >
                     </mat-form-field>
                     <mat-form-field>
+                        <input matInput placeholder="Nro de Folio" [(ngModel)]="asiento.Nro_folio">
+                    </mat-form-field>
+                    <mat-form-field>
 
-                        <mat-select placeholder="Type" [(ngModel)]="selectedTypeAsientoValue" name="item">
+                        <mat-select placeholder="Tipo de asiento" [(ngModel)]="selectedTypeAsientoValue" name="item">
                             <mat-option *ngFor="let item of typeAsientos" [value]="item.value">
                                 {{item.viewValue}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Detalle" [(ngModel)]="asiento.fecha">
+                    </mat-form-field>
 
+    <ng-container *ngIf="selectedTypeAsientoValue == 1; else elseTemplate">
                     <mat-form-field>
 
-                        <mat-select placeholder="Type" [(ngModel)]="selectedCuentaIngresoValue" name="item">
+                        <mat-select placeholder="Cuenta" [(ngModel)]="selectedCuentaIngresoValue" name="item">
                             <mat-option *ngFor="let cuenta of cuentas$ | async" [value]="cuenta.id">
                                 {{cuenta.nombre}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
 
-                    <mat-form-field>
-                        <input matInput placeholder="Detalle" [(ngModel)]="asiento.fecha">
-                    </mat-form-field>
                 
-                    <mat-form-field>
-                        <input matInput placeholder="Nro de Folio" [(ngModel)]="asiento.Nro_folio">
-                    </mat-form-field>
-<ng-container *ngIf="selectedTypeAsientoValue == 1; else elseTemplate">
     <mat-form-field>
         <input matInput placeholder="Debitos" [(ngModel)]="asiento.debitos">
     </mat-form-field>
     
+    <mat-form-field>
+        <input matInput placeholder="Creditos" [(ngModel)]="asiento.creditos">
+    </mat-form-field>
+    
+    <mat-form-field>
+            <input matInput placeholder="Monto" [(ngModel)]="asiento.creditos">
+    </mat-form-field>
 </ng-container>
 <ng-template #elseTemplate>
 
-    <ng-container *ngIf="selectedTypeAsientoValue==2; else elseTemplate">
-        <mat-form-field>
-            <input matInput placeholder="Creditos" [(ngModel)]="asiento.creditos">
-        </mat-form-field>
+    <ng-container *ngIf="selectedTypeAsientoValue==2;">
         
     </ng-container>
-    <ng-template #elseTemplate>
-        <ng-container *ngIf="selectedTypeAsientoValue==3;">
-                <mat-form-field>
-                        <input matInput placeholder="Monto" [(ngModel)]="asiento.creditos">
-                </mat-form-field>
-        </ng-container>
-        
-    </ng-template>
-    
 
 </ng-template>
 
@@ -66,3 +63,106 @@
                        
                 </mat-card>
             </div>
+    
+            <form [formGroup]="asientoForm" (ngSubmit)="onSubmit()">
+            
+                
+                <div formArrayName="movimientos">
+                    <h3>Aliases</h3> <button (click)="addAlias()">Add Alias</button>
+                    
+                    <div *ngFor="let movimiento of movimientos.controls; let i=index">
+                        
+                        <mat-form-field>
+            
+                                <mat-select placeholder="Cuenta" (selectionChange)="selectionChange()" [formControlName]="i" name="item">
+                                    <mat-option *ngFor="let cuenta of cuentas$ | async" [value]="cuenta.id">
+                                        {{cuenta.nombre}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        <label> 
+                                <div [formGroupName]="i">
+                                        <input formControlName="name" placeholder="Item name">
+                                        <input formControlName="description" placeholder="Item description">
+                                        <input formControlName="price" placeholder="Item price">
+                                      </div>
+                           
+                        </label>
+                        <div>
+                            <mat-radio-group aria-label="Select an option">
+                                        <mat-radio-button value="1">Debe</mat-radio-button>
+                                        <mat-radio-button value="2">Haber</mat-radio-button>
+                                </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <button type="submit" [disabled]="!asientoForm.valid">Submit</button>
+            </form>
+        -->
+        
+        <mat-divider>
+</mat-divider>
+<div class="container">
+    
+    <mat-card>
+        <h3>Asiento</h3> 
+        
+        <form [formGroup]="asientoForm" (ngSubmit)="onSubmit()" >
+        <mat-form-field>
+        <input matInput formControlName="nroFolio" type="text" placeholder="Numero de Folio" >
+    </mat-form-field>
+    <mat-form-field style="margin-left: 2em;" >
+                <input matInput formControlName="fecha" type="date" placeholder="Fecha" >
+        </mat-form-field>
+        <mat-form-field style="margin-left: 2em;">
+            <textarea put matInput formControlName="descripcion" type="text" placeholder="Descripcion"></textarea>
+        </mat-form-field>
+        <h3>Movimientos</h3> 
+        <button mat-raised-button  (click)="addItem()">Añadir movimiento</button>
+
+    <div formArrayName="movimientos"
+    *ngFor="let item of asientoForm.get('movimientos').controls; let i = index;">
+    <div [formGroupName]="i">
+            <mat-form-field>
+                
+                <mat-select *ngIf="cuentas" placeholder="Cuenta" formControlName="cuentaId">
+                    <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta.id">
+                        {{cuenta.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!--
+        <input formControlName="name" placeholder="Item name">
+        
+    -->
+    <mat-form-field style="margin-left: 2em;" >
+
+        <input matInput  formControlName="description" placeholder="Descripcion del Movimiento">
+    </mat-form-field>
+    <mat-form-field style="margin-left: 2em;">
+
+        <input matInput  formControlName="monto" placeholder="Monto">
+    </mat-form-field>
+
+            
+            
+
+            <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    formControlName="tipoMovimiento">
+    <mat-radio-button class="example-radio-button" *ngFor="let tipoMovimiento of tipoMovimientos" [value]="tipoMovimiento">
+        {{tipoMovimiento}}
+    </mat-radio-button>
+</mat-radio-group>
+
+    </div>
+    
+</div>
+<button mat-raised-button color="primary" type="submit" >Enviar</button>
+</form>
+</mat-card>
+</div>

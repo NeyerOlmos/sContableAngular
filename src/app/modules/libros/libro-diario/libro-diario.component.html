@@ -1,0 +1,92 @@
+<h1 >Libro Diario</h1>
+<mat-grid-list cols="5" rowHeight="50px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1" >
+        <mat-grid-tile-header>Fecha</mat-grid-tile-header>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1" >
+        <mat-grid-tile-header>Nombre de Cuentas</mat-grid-tile-header>
+    </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"[rowspan]="1" >
+            <mat-grid-tile-header>Debe</mat-grid-tile-header>
+            
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"[rowspan]="1" >
+            <mat-grid-tile-header>Haber</mat-grid-tile-header>
+        </mat-grid-tile>
+    </mat-grid-list>
+    
+    <mat-grid-list cols="5" rowHeight="50px">
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            <p>20/12/2019</p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="5" >
+            <mat-list>
+                <mat-list-item>Caja</mat-list-item>
+                <mat-list-item>Mercaderia</mat-list-item>
+                <mat-list-item>Activo Fijo</mat-list-item>
+                <mat-list-item>Maquinaria</mat-list-item>
+                <mat-list-item>Aporte Socios</mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            
+            <mat-list>
+                <mat-list-item>10000</mat-list-item>
+                <mat-list-item>150000</mat-list-item>
+                <mat-list-item>15000</mat-list-item>
+                <mat-list-item>1000000</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            <mat-list>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>1175000</mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+            
+        </mat-grid-list>
+
+        <mat-divider></mat-divider>
+    
+    <mat-grid-list cols="5" rowHeight="50px">
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            <p>20/12/2019</p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="5" >
+            <mat-list>
+                <mat-list-item class="acreedor" >Caja</mat-list-item>
+                <mat-list-item class="acreedor" >Mercaderia</mat-list-item>
+                <mat-list-item>Activo Fijo</mat-list-item>
+                <mat-list-item>Maquinaria</mat-list-item>
+                <mat-list-item class="debitor" >Aporte Socios</mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            
+            <mat-list>
+                <mat-list-item>10000</mat-list-item>
+                <mat-list-item>150000</mat-list-item>
+                <mat-list-item>15000</mat-list-item>
+                <mat-list-item>1000000</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            <mat-list>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>-</mat-list-item>
+                <mat-list-item>1175000</mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+            
+        </mat-grid-list>
