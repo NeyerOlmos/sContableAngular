@@ -124,7 +124,7 @@
         <button mat-raised-button  (click)="addItem()">Añadir movimiento</button>
 
     <div formArrayName="movimientos"
-    *ngFor="let item of asientoForm.get('movimientos').controls; let i = index;">
+    *ngFor="let item of movimmientos.controls; let i = index;">
     <div [formGroupName]="i">
             <mat-form-field>
                 

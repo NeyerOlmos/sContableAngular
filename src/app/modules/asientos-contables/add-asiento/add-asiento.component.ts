@@ -54,9 +54,12 @@ createItem(): FormGroup {
 }
 addItem(): void {
   this.movimientos = this.asientoForm.get('movimientos') as FormArray;
+  
   this.movimientos.push(this.createItem());
 }
-
+get movimmientos(){
+  return this.asientoForm.get('movimientos') as FormArray;
+}
 onSubmit() {
   // TODO: Use EventEmitter with form value
   console.warn(this.asientoForm.value);
