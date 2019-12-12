@@ -142,7 +142,7 @@ onSubmit() {
     this.notificationService.message("Se guardo el asiento correctamente",":)")
   }, err => {
     this.unblockView();
-    this.notificationService.message("ERROR" + err ,":(")
+    this.notificationService.message("ERROR: " + err ,":(")
     console.log('HTTP Error', err)
 },
   )
