@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AsientoContableExtended } from 'src/app/models/asiento-contable-extended';
 import { Observable, of, throwError } from 'rxjs';
 import { CuentaService } from '../plan-de-cuenta/cuenta.service';
+import { AsientoContableExtended } from './../../models/asiento-contable-extended';
 
 @Injectable({
   providedIn: 'root'

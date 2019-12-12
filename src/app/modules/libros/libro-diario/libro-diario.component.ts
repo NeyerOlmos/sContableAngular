@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LibrosService } from '../libros.service';
-import { AsientoContableExtended } from 'src/app/models/asiento-contable-extended';
+import { AsientoContableExtended } from '../../../models/asiento-contable-extended';
 import { Observable } from 'rxjs';
 import { PlanDeCuentasService } from '../../plan-de-cuenta/plan-de-cuentas.service';
 import { CuentaService } from '../../plan-de-cuenta/cuenta.service';

@@ -3,7 +3,7 @@ import { CuentaService } from '../plan-de-cuenta/cuenta.service';
 import { Comprobante } from 'src/app/models/comprobante';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AsientoContableExtended } from 'src/app/models/asiento-contable-extended';
+import { AsientoContableExtended } from './../../models/asiento-contable-extended';
 
 @Injectable({
   providedIn: 'root'
