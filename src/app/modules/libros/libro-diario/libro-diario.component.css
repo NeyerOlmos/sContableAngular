@@ -4,3 +4,6 @@
 .debitor{
   margin-left: 5em;
 }
+.hideHaber, .hideDebe{
+  display: none;
+}

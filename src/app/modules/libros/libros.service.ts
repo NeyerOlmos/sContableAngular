@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CuentaService } from '../plan-de-cuenta/cuenta.service';
 import { Comprobante } from 'src/app/models/comprobante';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { AsientoContableExtended } from 'src/app/models/asiento-contable-extended';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibrosService {
-
-  constructor(private cuentasService: CuentaService) { }
+  private apiUrl = environment.WebApiUrl;
+  constructor(private cuentasService: CuentaService, private http: HttpClient) { }
   
   ObtenerMovimientos(){
     
@@ -21,5 +24,8 @@ export class LibrosService {
    cbte.creditos =100;
    cbte.debitos = null;
     
+  }
+  GetAsientos(){
+   return this.http.get<AsientoContableExtended[]>(this.apiUrl+"/api/AsientoContableExtended");
   }
 }

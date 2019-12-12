@@ -34,9 +34,10 @@ export class CuentaService {
   }
   getCuentasByPlanDeCuentas(planDeCuentas: PlanDeCuentas){
       return this._cuentas.asObservable().pipe(map(cuentas=> {
-        return cuentas.filter(cuenta=>cuenta.id_PlanDeCuentas=planDeCuentas.Cod );
+          return cuentas.filter(cuenta=>cuenta.id_PlanDeCuentas == planDeCuentas.Cod );
       }))
   }
+
   getCuentasByLevel(cuentas: CuentaContable[], level: number) {
     return cuentas.filter(cuenta => this.getLevel(cuenta) === level );
   }
@@ -117,6 +118,13 @@ export class CuentaService {
     cuenta =  c.find(_c=>_c.nombre==name)
     })
    return cuenta;
+  }
+  getCuentaById(id: number){
+   var cuenta: CuentaContable;
+   this.cuentasList.subscribe(c=>{
+    cuenta =  c.find(_c=>_c.id==id)
+    })
+   return cuenta.nombre;
   }
   getCod(cuentaPadre: CuentaContable ){
     if(cuentaPadre){

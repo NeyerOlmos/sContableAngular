@@ -1,6 +1,8 @@
-<h1 >Libro Diario</h1>
-<mat-grid-list cols="5" rowHeight="50px">
-    <mat-grid-tile [colspan]="1" [rowspan]="1" >
+<!-- 
+
+    <h1 >Libro Diario</h1>
+    <mat-grid-list cols="5" rowHeight="50px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1" >
         <mat-grid-tile-header>Fecha</mat-grid-tile-header>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1" >
@@ -90,3 +92,74 @@
         </mat-grid-tile>
             
         </mat-grid-list>
+        -->
+        <h1 >Libro Diario</h1>
+<mat-grid-list cols="5" rowHeight="50px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1" >
+        <mat-grid-tile-header>Fecha</mat-grid-tile-header>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1" >
+        <mat-grid-tile-header>Nombre de Cuentas</mat-grid-tile-header>
+    </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"[rowspan]="1" >
+            <mat-grid-tile-header>Debe</mat-grid-tile-header>
+            
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"[rowspan]="1" >
+            <mat-grid-tile-header>Haber</mat-grid-tile-header>
+        </mat-grid-tile>
+    </mat-grid-list>
+    
+    <mat-grid-list *ngFor="let asiento of asientos$ | async" cols="5" rowHeight="50px">
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            <p>{{asiento.fecha}}</p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="5" >
+            <mat-list>
+                <mat-list-item *ngFor="let movimiento of asiento.movimientos" >{{ getNombreDeCuenta(movimiento.cuentaId)}}</mat-list-item>
+                
+            </mat-list>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            
+            <mat-list>
+                <mat-list-item *ngFor="let movimiento of asiento.movimientos" >
+                    <ng-container *ngIf="movimiento.tipoMovimiento == 'Debe'; else hideHaber">
+                        <div >
+                            {{movimiento.monto}}
+                        </div>
+                    </ng-container>
+                    <ng-template #hideHaber>
+                        <div class="hideHaber"></div>
+                    </ng-template>
+                    
+                    
+                </mat-list-item>
+                
+            </mat-list>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [colspan]="1" [rowspan]="5" >
+            <mat-list>
+                <mat-list-item *ngFor="let movimiento of asiento.movimientos" >
+                    
+                    <ng-container *ngIf="movimiento.tipoMovimiento == 'Haber'; else hideDebe">
+                        <div >
+                            {{movimiento.monto}}
+                        </div>
+                    </ng-container>
+                    <ng-template #hideHaber>
+                        <div class="hideDebe"></div>
+                    </ng-template>
+                </mat-list-item>
+                
+                
+            </mat-list>
+        </mat-grid-tile>
+            
+        </mat-grid-list>
+
+        <mat-divider></mat-divider>
+    
+    
